@@ -94,10 +94,9 @@ let permutationToString = p =>
 let data = permInts => {
   let myPerms = permutations(permInts);
 
-  let topSpacing = 50;
-  let ySpacing = 100;
-  let leftSpacing = 50;
-  let xSpacing = 75;
+  let margin = 50;
+  let ySpacing = 60;
+  let xSpacing = 100;
 
   let nodes: list(nodeData) =
     myPerms
@@ -109,14 +108,14 @@ let data = permInts => {
            {
              nextPermId != i && nextPermId < i;
            }
-             ? (nextPermId, ySpacing + topSpacing) : (i, topSpacing);
+             ? (xSpacing + margin, nextPermId) : (margin, i);
 
          (node(~id=nodeString, ~label=permutationToString(p)), x, y);
        })
     |> List.mapi((i, (node, x, y)) =>
          nodeData(
            ~data=node,
-           ~position=position2D(~x=leftSpacing + x * xSpacing, ~y),
+           ~position=position2D(~x, ~y=margin + y * ySpacing),
          )
        );
 
