@@ -83,8 +83,6 @@ let default = (d, o) =>
   | Some(a) => a
   };
 
-let myPerms = permutations([1, 2, 3, 4]);
-
 let nextPermId = (l, p) =>
   l |> findIndex(a => a == nextPerm(p)) |> default(-1);
 
@@ -93,7 +91,9 @@ let permutationToString = p =>
   ++ List.fold_left((a, c) => a ++ string_of_int(c) ++ ",", "", p)
   ++ "]";
 
-let data = () => {
+let data = permInts => {
+  let myPerms = permutations(permInts);
+
   let topSpacing = 50;
   let ySpacing = 100;
   let leftSpacing = 50;
@@ -156,6 +156,6 @@ let make = () => {
       ~borderWidth="1px",
       (),
     )}>
-    <Cytoscape elements={data()} />
+    <Cytoscape elements={data([1, 2, 3, 4])} />
   </div>;
 };
